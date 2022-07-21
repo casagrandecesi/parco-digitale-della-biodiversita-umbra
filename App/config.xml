@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="it.edu.casagrandecesi.biodiversita" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>On the road</name>
+    <description>Esplora la ricchezza della biodiversità dell'Umbria on the road!</description>
+    <author email="info@biodiversitaumbra.it" href="https://www.biodiversitaumbra.it">
+        I.I.S. "Casagrande-Cesi", Terni
+    </author>
+    <content src="index.html" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.GeoBroker" />
+    </feature>
+    <platform name="android">    
+        <preference name="android-targetSdkVersion" value="30" />
+        <icon src="assets/ldpi.png" density="ldpi" />
+        <icon src="assets/mdpi.png" density="mdpi" />
+        <icon src="assets/hdpi.png" density="hdpi" />
+        <icon src="assets/xhdpi.png" density="xhdpi" />
+        <icon src="assets/xxhdpi.png" density="xxhdpi" />
+        <icon src="assets/xxxhdpi.png" density="xxxhdpi" />
+    </platform>
+      
+</widget>

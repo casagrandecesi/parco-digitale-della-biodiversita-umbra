@@ -1,0 +1,30 @@
+---
+title : "La biodiversità nel metaverso"
+enable: true
+subtitle: >
+        Grazie alle più recenti tecnologie di realtà virtuale è
+        possibile avere l'intero panorama della biodiversità regionale
+        a portata di mano in uno spazio virtuale assolutamente
+        coinvolgente. Immergiti nella ricchezza della biodiversità
+        umbra con visori specializzati o tramite lo schermo
+        del tuo computer, tablet o smartphone.
+galleryImage: 
+  - image: 
+      url   : "images/gallery/gallery01.jpg"
+      target: "https://hubs.mozilla.com/scenes/2FopkAj"
+  - image:
+      url: "images/gallery/gallery02.jpg"
+      target: "https://hubs.mozilla.com/scenes/JH3TsB8"
+  - image:
+      url: "images/gallery/gallery03.jpg"
+      target: "https://hubs.mozilla.com/scenes/yEcD7xw"
+  - image:
+      url: "images/gallery/gallery04.jpg"
+      target: "https://hubs.mozilla.com/scenes/QjBkFSL"
+  - image:
+      url: "images/gallery/gallery05.jpg"
+      target: "https://hubs.mozilla.com/scenes/zZXjg2k"
+  - image:
+      url: "images/gallery/gallery06.jpg"
+      target: "https://hubs.mozilla.com/scenes/b4CePUm"
+---

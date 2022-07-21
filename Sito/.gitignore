@@ -1,0 +1,6 @@
+.DS_Store
+.idea/
+/resources/
+/public/
+__pycache__/
+.mypy_cache/

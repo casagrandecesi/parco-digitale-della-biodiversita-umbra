@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
+            https://cordova.apache.org/docs/en/latest/
+        Some notes:
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>On the road - Parco digitale della biodiversità umbra</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-dark bg-dark">
+        <div class="container align-items-center">
+            <div class="navbar-header" style="width: 100%">
+                <div class="row">
+                    <div class="col-2">
+                        <img id="fogliolina" class="float-right" src="img/favicon.png" width="38" height="38">
+                        <button id="bottone-indietro" type="button" style="display: none" class="btn btn-light">«</button>
+                    </div>
+                    <div class="col-8 align-items-center">
+                        <h1 class="fs-4 text-white mb-0" style="text-align: center; width: 100%">On the road</h1>
+                    </div>
+                    <div class="col-2">
+                        <a style="display: inline-block; text-align: right; width:100%" href="https://www.casagrandecesi.edu.it/">
+                            <img src="img/cc-green.png" width="38" height="38">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="cerca" class="bg-light p-5 rounded">
+            <h2>Guardati intorno!</h2>
+            <p class="lead">
+                Ovunque tu sia nella regione, l'Umbria ha dei meravigliosi
+                tesori di biodiversità da offrire: tocca il pulsante qui
+                sotto per scoprirli!
+            </p>
+            <p><a id="bottone-scopri" class="btn btn-lg btn-primary" href="#" role="button">Scopri di più &raquo;</a></p>
+            <p>
+                Verrà richiesta la tua posizione, ma questa informazione non uscirà dal tuo dispositivo e non verrà memorizzata.
+            </p>
+            <p>
+                <a id="informazioni" href="#">Informazioni sui dati della biodiversità</a>
+            </p>
+        </div>
+        <div id="risultati" style="display: none">
+        </div>
+        <div id="about" style="display: none" class="bg-light p-5 rounded">
+            <img style="width: 100%" src="img/about.png">
+            <p>Il Parco digitale della biodiversità umbra è un progetto
+                didattico dell'<a href="https://www.casagrandecesi.edu.it/">I.I.S. "Casagrande-Cesi" di Terni</a>.
+            </p>
+            <hr>
+            <p>
+                I dati sono stati messi a disposizione da 
+                <a href="https://odn.regione.umbria.it/my_MM/dataset/dati-biodiversita/resource/b26a331f-161c-47a6-9fb2-c08bc685fccc?view_id=dca915cb-62be-4b18-b20c-da4dd4e50bf4">Regione Umbria</a> e
+                <a href="https://biodiversita.umbria.parco3a.org/attivita/registro-regionale/">3A Parco Tecnologico Agroalimentare</a>.
+            </p>
+        </div>
+        <div id="erroregps" style="display: none" class="bg-light p-5 rounded">
+            <h2>Errore di localizzazione</h2>
+            <p>Per favore verifica che i servizi di localizzazione (il GPS) siano attivi.</p>
+        </div>
+        <div id="caricamento" style="display: none; text-align: center; padding-top: 50px">
+            <img src="img/loading.gif">
+        </div>
+    </main>
+    <script src="cordova.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/proj4.js"></script>
+    <script src="js/turf.min.js"></script>
+    <script src="js/biodiversita.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

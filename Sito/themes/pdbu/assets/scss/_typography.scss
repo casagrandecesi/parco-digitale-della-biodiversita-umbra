@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400|Open+Sans:300,400,600,700&display=swap');
+
+body {
+  font-family: $secondary-font;
+  font-size: 16px;
+  color: $text-color;
+  background: $body-color;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $text-color-dark;
+  font-family: $primary-font;
+  font-weight: 400;
+}
+
+p {
+  font-size: 16px;
+  color: $text-color;
+  line-height: 26px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+h1 {
+  font-size: 44px;
+  line-height: 58px;
+
+}
+
+h2 {
+  font-size: 33px;
+  line-height: 45px;
+  font-weight: 300;
+
+}
+
+h3 {
+  font-size: 19px;
+  font-weight: 400;
+  color: $text-color-dark;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+a {
+  color: $primary-color;
+}
+
+a:hover {
+  color: $secondary-color;
+}
+
+.btn-primary:hover {
+  background: $secondary-color;
+  border-color: $secondary-color;
+}
+
+.post-body ul, .post-body ol {
+  margin-bottom: 30px !important;
+}
+
+.post-body blockquote p {
+  font-size: 18px !important;
+  font-style: italic;
+  color: #787878 !important;
+  font-weight: 100 !important;
+}
+
+.blog-content h3 a {
+  text-transform: none !important;
+}
+
+.apk-download {
+  width: 309px;
+  height: 89px;
+  display: inline-block;
+  background: url("../images/apk.png") no-repeat;
+}
+
+.apk-download:hover {
+  background: url("../images/apk-green.png") no-repeat;
+}

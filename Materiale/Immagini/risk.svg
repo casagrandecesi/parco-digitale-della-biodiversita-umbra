@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 500 400"
+   class="chart"
+   version="1.1"
+   id="svg84"
+   sodipodi:docname="risk.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata90">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs88">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient871">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop867" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop869" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient871"
+       id="linearGradient873"
+       x1="15.087128"
+       y1="155.76086"
+       x2="202.47385"
+       y2="155.76086"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     id="namedview86"
+     showgrid="false"
+     inkscape:zoom="2.05"
+     inkscape:cx="286.62614"
+     inkscape:cy="211.67168"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg84"
+     inkscape:document-rotation="0" />
+  <style
+     id="style2">
+.svg-line {
+    animation: svg-line 5s both infinite;
+}
+.delay1 {
+    animation-delay: 1s;
+}
+@keyframes svg-line {
+	0%,100% {
+        stroke-dashoffset: 0%
+    }
+        50% {
+        stroke-dashoffset: 3%
+    }
+}
+</style>
+  <title
+     id="title4">Emoji 💞 Sentiment Analysis | emojiall.com</title>
+  <g
+     transform="matrix(0.8,0,0,0.8,75.365854,10.317073)"
+     id="g30"
+     inkscape:export-xdpi="240.73"
+     inkscape:export-ydpi="240.73">
+    <circle
+       cx="50"
+       cy="315"
+       r="50"
+       fill="#ff5e3a"
+       id="circle20" />
+    <g
+       fill="none"
+       stroke="#ffffff"
+       stroke-width="8"
+       stroke-linecap="round"
+       id="g28">
+      <line
+         x1="39"
+         y1="291.5"
+         x2="39"
+         y2="299.5"
+         id="line22" />
+      <line
+         x1="71.599998"
+         y1="291.5"
+         x2="71.599998"
+         y2="299.5"
+         id="line24" />
+      <path
+         d="m 73.4,324.2 c -10,-10 -26.2,-10 -36.3,0"
+         id="path26" />
+    </g>
+  </g>
+  <g
+     transform="matrix(0.8,0,0,0.8,158.29268,9.3414629)"
+     id="g42"
+     inkscape:export-xdpi="263.70999"
+     inkscape:export-ydpi="263.70999">
+    <circle
+       cx="250"
+       cy="315"
+       r="50"
+       fill="#ff9900"
+       id="circle32" />
+    <g
+       fill="none"
+       stroke="#ffffff"
+       stroke-width="8"
+       stroke-linecap="round"
+       id="g40">
+      <line
+         x1="234.5"
+         y1="289.5"
+         x2="234.5"
+         y2="297.5"
+         id="line34" />
+      <line
+         x1="267.10001"
+         y1="289.5"
+         x2="267.10001"
+         y2="297.5"
+         id="line36" />
+      <line
+         x1="232.7"
+         y1="319.20001"
+         x2="268.89999"
+         y2="319.20001"
+         id="line38" />
+    </g>
+  </g>
+  <g
+     transform="matrix(0.8,0,0,0.8,0.73170761,-178.46342)"
+     id="g54"
+     inkscape:export-xdpi="240.73"
+     inkscape:export-ydpi="240.73">
+    <circle
+       cx="450"
+       cy="315"
+       r="50"
+       fill="#35a541"
+       id="circle44" />
+    <g
+       fill="none"
+       stroke="#ffffff"
+       stroke-width="8"
+       stroke-linecap="round"
+       id="g52">
+      <line
+         x1="429.5"
+         y1="289.5"
+         x2="429.5"
+         y2="297.5"
+         id="line46" />
+      <line
+         x1="462.10001"
+         y1="289.5"
+         x2="462.10001"
+         y2="297.5"
+         id="line48" />
+      <path
+         d="m 427.7,316.2 c 10,10 26.2,10 36.3,0"
+         id="path50" />
+    </g>
+  </g>
+  <text
+     x="115.36585"
+     y="342.31708"
+     id="text56"
+     inkscape:export-xdpi="240.73"
+     inkscape:export-ydpi="240.73"
+     style="font-size:24px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;"><tspan
+       sodipodi:role="line"
+       id="tspan919"
+       x="115.36585"
+       y="342.31708">Grado di rischio</tspan><tspan
+       sodipodi:role="line"
+       id="tspan921"
+       x="115.36585"
+       y="372.31708"
+       style="font-weight:bold;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;">ELEVATO</tspan></text>
+  <text
+     x="358.29269"
+     y="341.34146"
+     id="text58"
+     inkscape:export-xdpi="263.70999"
+     inkscape:export-ydpi="263.70999"
+     style="font-size:24px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;"><tspan
+       sodipodi:role="line"
+       id="tspan962"
+       x="358.29269"
+       y="341.34146">Grado di rischio</tspan><tspan
+       sodipodi:role="line"
+       id="tspan964"
+       x="358.29269"
+       y="371.34146"
+       style="font-weight:bold;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;">MEDIO</tspan></text>
+  <text
+     x="360.73172"
+     y="153.53659"
+     id="text60"
+     inkscape:export-xdpi="240.73"
+     inkscape:export-ydpi="240.73"
+     style="font-size:24px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;"><tspan
+       sodipodi:role="line"
+       id="tspan915"
+       x="360.73172"
+       y="153.53659">Grado di rischio</tspan><tspan
+       sodipodi:role="line"
+       id="tspan917"
+       x="360.73172"
+       y="183.53659"
+       style="font-weight:bold;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;">NON A RISCHIO</tspan></text>
+  <g
+     transform="matrix(0.8,0,0,0.8,68.76291,-182.29187)"
+     id="g30-4"
+     inkscape:export-xdpi="263.70999"
+     inkscape:export-ydpi="263.70999"
+     style="font-size:24px;text-anchor:middle;fill:#888888">
+    <circle
+       cx="50"
+       cy="315"
+       r="50"
+       fill="#ff5e3a"
+       id="circle20-0" />
+    <g
+       fill="none"
+       stroke="#ffffff"
+       stroke-width="8"
+       stroke-linecap="round"
+       id="g28-1">
+      <line
+         x1="39"
+         y1="291.5"
+         x2="39"
+         y2="299.5"
+         id="line22-1" />
+      <line
+         x1="71.599998"
+         y1="291.5"
+         x2="71.599998"
+         y2="299.5"
+         id="line24-4" />
+      <path
+         d="m 73.4,324.2 c -10,-10 -26.2,-10 -36.3,0"
+         id="path26-6" />
+    </g>
+  </g>
+  <text
+     x="108.76291"
+     y="149.70813"
+     id="text56-2"
+     inkscape:export-xdpi="263.70999"
+     inkscape:export-ydpi="263.70999"
+     style="font-size:24px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;"><tspan
+       sodipodi:role="line"
+       id="tspan919-3"
+       x="108.76291"
+       y="149.70813"
+       style="stroke:#ffffff;stroke-opacity:1;">Grado di rischio</tspan><tspan
+       sodipodi:role="line"
+       id="tspan921-8"
+       x="108.76291"
+       y="179.70813"
+       style="font-weight:bold;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;">MINACCIATA</tspan></text>
+</svg>

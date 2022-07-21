@@ -1,0 +1,11 @@
+Model Information:
+* title:	cgimodels billboard
+* source:	https://sketchfab.com/3d-models/cgimodels-billboard-5344fcc4028a4cfa90f4e2ff79f7b7ab
+* author:	stepanprokop (https://sketchfab.com/stepanprokop)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "cgimodels billboard" (https://sketchfab.com/3d-models/cgimodels-billboard-5344fcc4028a4cfa90f4e2ff79f7b7ab) by stepanprokop (https://sketchfab.com/stepanprokop) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,0 +1,16 @@
+---
+enable: true
+title: "Un circolo virtuoso"
+feedback: >
+          `Il Parco digitale della biodiversità umbra è un'attività di project-based learning che poggia
+          sulle spalle del grande lavoro, disponibile come open data, della 
+          <a href="https://odn.regione.umbria.it/my_MM/dataset/dati-biodiversita/resource/b26a331f-161c-47a6-9fb2-c08bc685fccc?view_id=dca915cb-62be-4b18-b20c-da4dd4e50bf4">Regione Umbria</a>
+          e di <a href="https://biodiversita.umbria.parco3a.org/">3A Parco tecnologico agroalimentare</a>.
+          <br><br>
+          Io e i miei studenti, interagendo con un'ampia gamma di tecnologie e metodologie digitali
+          nell'ambito di un progetto realistico, abbiamo avuto l'occasione di conoscere i tesori nascosti 
+          della biodiversità umbra e di mettere a disposizione di tutti un'esperienza innovativa.’
+
+feedbackAuthor: "PAOLO BERNARDI, DOCENTE DI INFORMATICA"
+backgroundImage: images/testimonial-bg.jpg
+---

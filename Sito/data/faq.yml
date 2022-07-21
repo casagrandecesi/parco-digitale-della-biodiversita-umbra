@@ -1,0 +1,33 @@
+---
+enable: true
+title: "Frequently Asked Questions"
+faq:
+  - question: "Q. Dove avete preso questi dati?"
+    answer: >
+            Il Parco digitale della biodiversità umbra è basato sul grande lavoro,
+            reso disponibile come open data, della
+            <a href="https://odn.regione.umbria.it/my_MM/dataset/dati-biodiversita/resource/b26a331f-161c-47a6-9fb2-c08bc685fccc?view_id=dca915cb-62be-4b18-b20c-da4dd4e50bf4">Regione Umbria</a>
+            e di <a href="https://biodiversita.umbria.parco3a.org/">3A Parco tecnologico agroalimentare</a>.
+            Ogni errore derivante dall'elaborazione di questi dati, tuttavia, è di esclusiva responsabilità del
+            Parco digitale della biodiversità umbra.
+  - question: "Q. Chi c'è dietro questo servizio?"
+    answer: >
+            Il Parco digitale della biodiversità umbra è frutto di un percorso di
+            project-based learning degli studenti dell'<a href="https://www.casagrandecesi.edu.it/">I.I.S. "Casagrande-Cesi" di Terni</a>.
+  - question: "Q. Per visualizzare gli ambienti di realtà virtuale serve un visore?"
+    answer: >
+            Le esposizioni in realtà virtuale possono essere fruite anche senza visore. Tuttavia l'esperienza
+            con il visore è molto più coinvolgente.
+  - question: "Q. Come posso installare l'app per l'esplorazione della biodiversità umbra on the road?"
+    answer: >
+            Attualmente per installare l'app, disponibile soltanto per dispositivi Android, è necessario
+            scaricare il file APK sul telefonino ed installarlo manualmente. In un futuro prossimo
+            verrà resa disponibile sul Play Store.
+  - question: "Q. Quella che vedo è tutta la biodiversità dell'Umbria?"
+    answer: >
+            Il Parco digitale della biodiversità umbra è basato sugli sforzi, resi disponibili come open data,
+            di <a href="https://odn.regione.umbria.it/my_MM/dataset/dati-biodiversita/resource/b26a331f-161c-47a6-9fb2-c08bc685fccc?view_id=dca915cb-62be-4b18-b20c-da4dd4e50bf4">Regione Umbria</a>
+            e di <a href="https://biodiversita.umbria.parco3a.org/">3A Parco tecnologico agroalimentare</a>, i cui
+            dati sono sempre più aggiornati. Il <a href="https://biodiversita.umbria.parco3a.org/attivita/registro-regionale/consultazione/">Registro Regionale</a>, in particolare, è la fonte
+            di riferimento.
+---

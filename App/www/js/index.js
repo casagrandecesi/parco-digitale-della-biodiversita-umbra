@@ -167,6 +167,19 @@ function onDeviceReady() {
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     //document.getElementById('deviceready').classList.add('ready');
 
+    // Fix for iOS, should not overlap the top bar
+    if (device && device.platform && (device.platform.startsWith("iPhone") || device.platform.startsWith("iOS"))) {
+        var body = document.getElementsByTagName("body")[0];
+        var div = document.createElement("div");
+        div.style.height = "36px";
+        div.style.width = "100%";
+        div.style.backgroundColor = "white";
+        div.classList.add("fixed-top");
+        var nav = document.getElementsByTagName("nav")[0];
+        nav.style.marginTop = "36px";
+        body.prepend(div);
+    }
+
     bottoneScopri.addEventListener("click", function () {
         // Trevi
         // var lat = 42.893333;

@@ -21,15 +21,44 @@
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 document.addEventListener('deviceready', onDeviceReady, false);
 
+var FACILE = 1;
+var INTERMEDIO = 2;
+var DIFFICILE = 3;
+var NUMERO_DOMANDE = 10;
+
 var bottoneScopri = document.getElementById("bottone-scopri");
+var bottoneQuiz = document.getElementById("bottone-quiz");
 var cerca = document.getElementById("cerca");
 var risultati = document.getElementById("risultati");
+var quiz = document.getElementById("quiz");
 var fogliolina = document.getElementById("fogliolina");
 var bottoneIndietro = document.getElementById("bottone-indietro");
 var informazioni = document.getElementById("informazioni");
 var about = document.getElementById("about");
 var erroregps = document.getElementById("erroregps");
 var caricamento = document.getElementById("caricamento");
+var bottoneQuizFacile = document.getElementById("bottone-quiz-facile");
+var bottoneQuizIntermedio = document.getElementById("bottone-quiz-intermedio");
+var bottoneQuizDifficile = document.getElementById("bottone-quiz-difficile");
+var quizIntro = document.getElementById("quiz-intro");
+var quizDomanda = document.getElementById("quiz-domanda");
+var quizRisultato = document.getElementById("quiz-risultato");
+var domande = [];
+var indiceDomanda = 0;
+var punti = 0;
+var spanIndiceDomanda = document.getElementById("indice-domanda");
+var spanNumeroDomande = document.getElementById("numero-domande");
+var quizNome = document.getElementById("quiz-nome");
+var quizImmagine = document.getElementById("quiz-immagine");
+var quizRispostaCorretta = document.getElementById("quiz-risposta-corretta");
+var quizRispostaSbagliata = document.getElementById("quiz-risposta-sbagliata");
+var bottoneQuizRisposta1 = document.getElementById("bottone-quiz-risposta-1");
+var bottoneQuizRisposta2 = document.getElementById("bottone-quiz-risposta-2");
+var bottoneQuizRisposta3 = document.getElementById("bottone-quiz-risposta-3");
+var quizRisultatoPunteggio = document.getElementById("quiz-risultato-punteggio");
+var quizRisultatoMessaggio = document.getElementById("quiz-risultato-messaggio");
+var quizRisultatoImmagine = document.getElementById("quiz-risultato-immagine");
+var bottoneFineQuiz = document.getElementById("bottone-fine-quiz");
 
 function isPointInside(x, y, polygon) {
     let inside = false;
@@ -89,9 +118,6 @@ function trovaArea(lat, lon) {
             found.push(biodiversita[i])
         }
     }
-    if (found.length > 0) {
-        console.log("FOUND!", found.length)
-    }
     // Ordina per area (preferito) e nome
     // In questo modo le risorse dell'area F (tutta la regione)
     // vanno in fondo
@@ -136,6 +162,7 @@ function nascondiTutto() {
     about.style.display = "none";
     cerca.style.display = "none";
     risultati.style.display = "none";
+    quiz.style.display = "none";
     fogliolina.style.display = "none";
     bottoneIndietro.style.display = "none";
     fogliolina.style.display = "none";
@@ -159,6 +186,134 @@ function cercaBiodiversita(lat, lon) {
     nascondiTutto();
     risultati.style.display = "block";
     bottoneIndietro.style.display = "block";
+}
+
+function riproduci(mp3) {
+    var audio = new Audio(mp3);
+    audio.play();
+}
+
+function mescola(arr) {
+    arr.sort(function () { return Math.random() - 0.5 });
+}
+
+function iniziaQuiz(livello) {
+    quizIntro.style.display = "none";
+    quizDomanda.style.display = "block";
+    quizRisultato.style.display = "none";
+
+    indiceDomanda = 0;
+    punti = 0;
+
+    var vegetale = biodiversita.filter(function(x) { return x.sezione_registro === "Vegetale"; });
+    mescola(vegetale);
+    var animale = biodiversita.filter(function(x) { return x.sezione_registro === "Animale"; });
+    mescola(animale);
+
+    if (livello == FACILE) domande = animale.slice(0, NUMERO_DOMANDE);
+    if (livello == INTERMEDIO) {
+        domande = animale.slice(0, NUMERO_DOMANDE / 2).concat(vegetale.slice(0, NUMERO_DOMANDE / 2));
+        mescola(domande);
+    }
+    if (livello == DIFFICILE) domande = vegetale.slice(0, NUMERO_DOMANDE);
+
+    for (var i = 0; i < NUMERO_DOMANDE; ++i) (function () {
+        var risposte = [domande[i].nome];
+        for (var k = 0; k < 2; ++k) (function () {
+            var candidata = null;
+            while (candidata === null) {
+                var x = biodiversita[Math.floor(Math.random() * biodiversita.length)];
+                if (!risposte.includes(x.nome) && x.sezione_registro === domande[i].sezione_registro) {
+                    candidata = x.nome;
+                }
+            }
+            risposte.push(candidata);
+        })();
+        mescola(risposte);
+        domande[i].risposte = risposte;
+    })();
+    mostraDomanda();
+}
+
+function resetBottoneDomanda(bottone) {
+    bottone.classList.remove("btn-outline-success");
+    bottone.classList.remove("btn-outline-danger");
+    bottone.classList.add("btn-secondary");
+}
+
+function bottoneRispostaCorretta(bottone) {
+    bottone.classList.remove("btn-secondary");
+    bottone.classList.add("btn-outline-success");
+}
+
+function bottoneRispostaSbagliata(bottone) {
+    bottone.classList.remove("btn-secondary");
+    bottone.classList.add("btn-outline-danger");
+}
+
+function mostraDomanda() {
+    var domanda = domande[indiceDomanda];
+    spanIndiceDomanda.innerHTML = indiceDomanda + 1;
+    spanNumeroDomande.innerHTML = NUMERO_DOMANDE;
+    quizRispostaCorretta.style.display = "none";
+    quizRispostaSbagliata.style.display = "none";
+    quizNome.innerHTML = domanda.sezione_registro;
+    quizImmagine.src = "schede/" + domanda.id + "/immagine.jpg";
+    bottoneQuizRisposta1.innerHTML = domanda.risposte[0];
+    resetBottoneDomanda(bottoneQuizRisposta1);
+    bottoneQuizRisposta2.innerHTML = domanda.risposte[1];
+    resetBottoneDomanda(bottoneQuizRisposta2);
+    bottoneQuizRisposta3.innerHTML = domanda.risposte[2];
+    resetBottoneDomanda(bottoneQuizRisposta3);
+}
+
+function mostraRisposta(risposta) {
+    var domanda = domande[indiceDomanda];
+    if (bottoneQuizRisposta1.innerHTML === domanda.nome) bottoneRispostaCorretta(bottoneQuizRisposta1);
+    else bottoneRispostaSbagliata(bottoneQuizRisposta1);
+    if (bottoneQuizRisposta2.innerHTML === domanda.nome) bottoneRispostaCorretta(bottoneQuizRisposta2);
+    else bottoneRispostaSbagliata(bottoneQuizRisposta2);
+    if (bottoneQuizRisposta3.innerHTML === domanda.nome) bottoneRispostaCorretta(bottoneQuizRisposta3);
+    else bottoneRispostaSbagliata(bottoneQuizRisposta3);
+    if (risposta === domanda.nome) {
+        ++punti;
+        quizRispostaCorretta.display = "block";
+        riproduci("snd/correct.mp3");
+    } else {
+        quizRispostaSbagliata.display = "block";
+        riproduci("snd/buzzer.mp3");
+    }
+    ++indiceDomanda;
+    setTimeout(function () {
+        if (indiceDomanda == NUMERO_DOMANDE) mostraRisultato();
+        else mostraDomanda();
+    }, 2500);
+}
+
+function mostraRisultato() {
+    quizIntro.style.display = "none";
+    quizDomanda.style.display = "none";
+    quizRisultato.style.display = "block";
+    quizRisultatoPunteggio.innerHTML = punti + "/" + NUMERO_DOMANDE + " PUNTI";
+    if (punti < 5) {
+        quizRisultatoMessaggio.innerHTML = "Puoi fare di meglio: vai, scopri la biodiversità umbra e torna a fare il quiz!";
+        quizRisultatoImmagine.src = "img/gameover.png";
+        riproduci("snd/gameover.mp3");
+    } else if (punti < 8) {
+        quizRisultatoMessaggio.innerHTML = "Bene, ma puoi ancora migliorare!";
+        quizRisultatoImmagine.src = "img/intermedio.png";
+        riproduci("snd/intermedio.mp3");
+    } else {
+        quizRisultatoMessaggio.innerHTML = "Ottimo! Conosci la biodiversità umbra come le tue tasche!";
+        quizRisultatoImmagine.src = "img/vittoria.png";
+        riproduci("snd/victory.mp3");
+    }
+}
+
+function tornaAllaHome() {
+    nascondiTutto();
+    cerca.style.display = "block";
+    fogliolina.style.display = "block";
 }
 
 function onDeviceReady() {
@@ -196,15 +351,50 @@ function onDeviceReady() {
         });
     });
 
-    bottoneIndietro.addEventListener("click", function () {
+    bottoneQuiz.addEventListener("click", function () {
         nascondiTutto();
-        cerca.style.display = "block";
-        fogliolina.style.display = "block";
+        bottoneIndietro.style.display = "block";
+        quizIntro.style.display = "block";
+        quizDomanda.style.display = "none";
+        quizRisultato.style.display = "none";
+        quiz.style.display = "block";
+    });
+
+    bottoneIndietro.addEventListener("click", function () {
+        tornaAllaHome();
     });
 
     informazioni.addEventListener("click", function () {
         nascondiTutto();
         about.style.display = "block";
         bottoneIndietro.style.display = "block";
+    });
+
+    bottoneQuizFacile.addEventListener("click", function () {
+        iniziaQuiz(FACILE);
+    });
+
+    bottoneQuizIntermedio.addEventListener("click", function () {
+        iniziaQuiz(INTERMEDIO);
+    });
+
+    bottoneQuizDifficile.addEventListener("click", function () {
+        iniziaQuiz(DIFFICILE);
+    });
+
+    bottoneQuizRisposta1.addEventListener("click", function () {
+        mostraRisposta(bottoneQuizRisposta1.innerHTML);
+    });
+
+    bottoneQuizRisposta2.addEventListener("click", function () {
+        mostraRisposta(bottoneQuizRisposta2.innerHTML);
+    });
+
+    bottoneQuizRisposta3.addEventListener("click", function () {
+        mostraRisposta(bottoneQuizRisposta3.innerHTML);
+    });
+
+    bottoneFineQuiz.addEventListener("click", function () {
+        tornaAllaHome();
     });
 }

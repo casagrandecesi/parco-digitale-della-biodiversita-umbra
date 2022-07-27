@@ -71,15 +71,39 @@
                 tesori di biodiversità da offrire: tocca il pulsante qui
                 sotto per scoprirli!
             </p>
-            <p><a id="bottone-scopri" class="btn btn-lg btn-primary" href="#" role="button">Scopri di più &raquo;</a></p>
-            <p>
-                Verrà richiesta la tua posizione, ma questa informazione non uscirà dal tuo dispositivo e non verrà memorizzata.
-            </p>
-            <p>
-                <a id="informazioni" href="#">Informazioni sui dati della biodiversità</a>
-            </p>
+            <p><a id="bottone-scopri" class="btn btn-lg btn-primary btn-pdbu" href="#" role="button">Scopri di più &raquo;</a></p>
+            <p>Verrà richiesta la tua posizione, ma questa informazione non uscirà dal tuo dispositivo e non verrà memorizzata.</p>
+            <hr>
+            <p class="lead">Quanto ne sai di biodiversità umbra? Scoprilo con il quiz!</p>            
+            <p><a id="bottone-quiz" class="btn btn-lg btn-info btn-pdbu" href="#" role="button">Vai al quiz &raquo;</a></p>
+            <hr>
+            <p><a id="informazioni" href="#">Informazioni sui dati della biodiversità</a></p>
         </div>
         <div id="risultati" style="display: none">
+        </div>
+        <div id="quiz" class="bg-light p-5 rounded" style="display: none">
+            <div id="quiz-intro">
+                <h2>Il Grande Quiz sulla Biodiversità</h2>
+                <p class="lead">Mettiti in gioco! Scegli il livello che ti sembra più adeguato e fai il quiz!</p>
+                <p><a id="bottone-quiz-facile" class="btn btn-lg btn-success btn-pdbu" href="#" role="button">Facile &raquo;</a></p>
+                <p><a id="bottone-quiz-intermedio" class="btn btn-lg btn-warning btn-pdbu" href="#" role="button">Intermedio &raquo;</a></p>
+                <p><a id="bottone-quiz-difficile" class="btn btn-lg btn-danger btn-pdbu" href="#" role="button">Difficile &raquo;</a></p>
+            </div>
+            <div id="quiz-domanda" style="text-align: center">
+                <p class="lead">(<span id="indice-domanda"></span>/<span id="numero-domande"></span>) Quale <span id="quiz-nome"></span> è rappresentato in foto?</p>
+                <p id="quiz-risposta-corretta" style="display: none">Risposta esatta!</p>
+                <p id="quiz-risposta-sbagliata" style="display: none">Risposta esatta!</p>
+                <p><img id="quiz-immagine" style="width: 100%"></p>
+                <p><a id="bottone-quiz-risposta-1" class="btn btn-lg btn-secondary btn-pdbu" href="#" role="button">Risposta 1</a></p>
+                <p><a id="bottone-quiz-risposta-2" class="btn btn-lg btn-secondary btn-pdbu" href="#" role="button">Risposta 2</a></p>
+                <p><a id="bottone-quiz-risposta-3" class="btn btn-lg btn-secondary btn-pdbu" href="#" role="button">Risposta 3</a></p>
+            </div>
+            <div id="quiz-risultato" style="text-align: center">
+                <p id="quiz-risultato-punteggio" class="lead"></p>
+                <p id="quiz-risultato-messaggio"></p>
+                <p><img id="quiz-risultato-immagine" style="width: 100%"></p>
+                <p><a id="bottone-fine-quiz" class="btn btn-lg btn-secondary btn-pdbu &raquo;" href="#" role="button">Torna all'inizio</a></p>
+            </div>
         </div>
         <div id="about" style="display: none" class="bg-light p-5 rounded">
             <img style="width: 100%" src="img/about.png">

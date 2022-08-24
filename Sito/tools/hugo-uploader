@@ -1,0 +1,208 @@
+#!/usr/bin/env python
+# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
+# -*- coding: utf-8 -*-
+"""
+This script builds the Hugo-based website and uploads it to its FTP.
+If a previous upload was completed successfully and tracked, only changed
+files will be uploaded, otherwise the whole website will be reuploaded
+from scratch.
+
+:copyright: (c) 2020 Paolo Bernardi.
+:license: GNU AGPL version 3, see LICENSE for more details.
+"""
+
+import configparser
+from datetime import datetime
+from ftplib import FTP, error_perm
+import _hashlib
+import hashlib
+import logging
+from multiprocessing import Pool
+import os
+import shutil
+import subprocess
+import sys
+from typing import Dict, Iterator, List
+
+
+def hash_bytestr_iter(bytesiter: Iterator[bytes], hasher: _hashlib.HASH) -> str:
+    """Iterate over blocks of bytes to compute a hash function.
+    Taken from https://stackoverflow.com/a/3431835."""
+    for block in bytesiter:
+        hasher.update(block)
+    return hasher.hexdigest()
+
+
+def file_as_blockiter(afile, blocksize=65536) -> Iterator[bytes]:
+    """Open a file as an interator over blocks of bytes.
+    Taken from https://stackoverflow.com/a/3431835."""
+    with afile:
+        block = afile.read(blocksize)
+        while len(block) > 0:
+            yield block
+            block = afile.read(blocksize)
+
+
+def hugo():
+    """Compiles the website with hugo, returns True on success
+    and False on failure."""
+    logging.info("Compiling the hugo website...")
+    shutil.rmtree("public", ignore_errors=True)
+    return subprocess.call(["hugo", "--minify"]) == 0
+
+
+def recursive_ls(d: str):
+    """Return the list of all files in the specified directory, with their
+    full directory up to the specified directory included."""
+    ls = []
+    for dir_name, subdir_list, file_list in os.walk(d):
+        for file_name in file_list:
+            full_file_name = os.path.join(dir_name, file_name)
+            ls.append(full_file_name)
+    return ls
+
+
+def compute_hash_list() -> Dict[str, str]:
+    """Create a list of the hash of the files from the public
+    directory. This list will be used to perform differential
+    uploads."""
+    logging.info("Computing public files hashes")
+    files = recursive_ls("public")
+    return {
+        f: hash_bytestr_iter(file_as_blockiter(open(f, "rb")), hashlib.sha256())
+        for f in files
+    }
+
+
+def save_hash_list(hash_list_file: str, hash_list: Dict[str, str]):
+    """Save the given hash list to the specified file."""
+    with open(hash_list_file, "w") as f:
+        f.write(f"# Hash list generated on {datetime.now()}\n")
+        for file_name, hexdigest in hash_list.items():
+            f.write(f"{file_name}\t{hexdigest}\n")
+
+
+def load_hash_list(hash_list_file: str) -> Dict[str, str]:
+    """Load the hash list from the specified file."""
+    with open(hash_list_file, "r") as f:
+        return dict(line.strip().split("\t") for line in f.readlines() if not line.startswith("#"))  # type: ignore
+
+
+def hash_list_diff(
+    new_hash_list: Dict[str, str], old_hash_list: Dict[str, str]
+) -> List[str]:
+    """Return the list of files that are present only in the new hash list or
+    that are present in the old hash list but with a different hash."""
+    return [
+        f
+        for f, h in new_hash_list.items()
+        if f not in old_hash_list or h != old_hash_list[f]
+    ]
+
+
+def cd_tree(ftp: FTP, current_dir: str):
+    """Move in the specified FTP directory, creating each directory
+    level if it doesn't exist.
+    Taken from https://stackoverflow.com/questions/10644608/create-missing-directories-in-ftplib-storbinary."""
+    if current_dir != "":
+        try:
+            ftp.cwd(current_dir)
+        except error_perm:
+            cd_tree(ftp, "/".join(current_dir.split("/")[:-1]))
+            ftp.mkd(current_dir)
+            ftp.cwd(current_dir)
+
+
+def get_ftp_config() -> configparser.SectionProxy:
+    """Return the FTP configuration as a configparser
+    SectionProxy (it can be used as a dict). If the configuration
+    doesn't exist, create it by interactively asking parameters
+    to the user."""
+    config = configparser.ConfigParser()
+    if not os.path.exists(".hugo-uploader.cfg"):
+        print("\nPlease enter your FTP configuration parameters.\n")
+        config["FTP"] = {
+            "ftp_host": input("FTP host: "),
+            "ftp_user": input("FTP user name: "),
+            "ftp_pass": input("FTP password: "),
+            "ftp_dir": input("FTP base directory: "),
+            "ftp_concurrent_connections": input("FTP concurrent connections"),
+        }
+        with open(".hugo-uploader.cfg", "w") as f:
+            config.write(f)
+    else:
+        config.read(".hugo-uploader.cfg")
+    return config["FTP"]
+
+
+def upload_file(pool_args):
+    """Upload a chunk of the whole file list to the configured FTP."""
+    config, i_chunk, chunk, prefix_len = pool_args
+    tot = len(chunk)
+    with FTP(config["ftp_host"], config["ftp_user"], config["ftp_pass"]) as ftp:
+        for i, file_name in enumerate(chunk):
+            remote_file_name = os.path.join(config["ftp_dir"], file_name[prefix_len:])
+            remote_file_name = remote_file_name.replace("\\", "/")
+            logging.debug(
+                f"([conn #{i_chunk}] {i+1}/{tot}) {file_name} ---> {remote_file_name}"
+            )
+            remote_dir = os.path.dirname(remote_file_name)
+            cd_tree(ftp, remote_dir)
+            remote_base = os.path.basename(remote_file_name)
+            with open(file_name, "rb") as f:
+                ftp.storbinary(f"STOR {remote_base}", f)
+
+
+def upload_files(files: List[str]):
+    """Upload the specified files to the configured FTP."""
+    prefix_len = len("public/")
+    tot = len(files)
+    config = get_ftp_config()
+    n_chunks = min(int(config["ftp_concurrent_connections"]), tot)
+    if n_chunks > 1:
+        logging.info(f"Using {n_chunks} parallel FTP connections...")
+    chunk_length = int(tot / n_chunks)
+    file_chunks = [files[i : i + chunk_length] for i in range(0, tot, chunk_length)]
+    pool_args = []
+    for i, chunk in enumerate(file_chunks):
+        pool_args.append((config, i, chunk, prefix_len))
+    pool = Pool(n_chunks)
+    pool.map(upload_file, pool_args)
+
+
+def main():
+    if len(sys.argv) >= 2:
+        os.chdir(sys.argv[1])
+    logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(message)s")
+    start_time = datetime.now()
+    logging.info(f"Starting at {start_time}")
+    if not hugo():
+        logging.error("Hugo error, aborting...")
+        sys.exit(1)
+    hash_list = compute_hash_list()
+    hash_list_file = ".hash_list"
+    if os.path.exists(hash_list_file):
+        logging.info("Hash list found, uploading only modified and new files")
+        old_hash_list = load_hash_list(".hash_list")
+        files_to_upload = hash_list_diff(hash_list, old_hash_list)
+    else:
+        logging.info("Hash list not found, uploading all files")
+        files_to_upload = list(hash_list.keys())
+    if not files_to_upload:
+        logging.info("There are no changes to upload, nothing to do.")
+    else:
+        logging.info(f"Uploading {len(files_to_upload)} files...")
+        upload_files(files_to_upload)
+        save_hash_list(hash_list_file, hash_list)
+    end_time = datetime.now()
+    logging.info(f"Finished at {end_time}")
+    elapsed = end_time - start_time
+    elapsed_hours, rem_seconds = divmod(elapsed.total_seconds(), 3600)
+    elapsed_minutes, elapsed_seconds = divmod(rem_seconds, 60)
+    logging.info(
+        f"Elapsed time: {int(elapsed_hours)} hours, {int(elapsed_minutes)} minutes, {elapsed_seconds:.1f} seconds."
+    )
+
+
+if __name__ == "__main__":
+    main()

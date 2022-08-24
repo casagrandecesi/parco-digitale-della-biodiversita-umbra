@@ -74,8 +74,11 @@
             <p><a id="bottone-scopri" class="btn btn-lg btn-primary btn-pdbu" href="#" role="button">Scopri di più &raquo;</a></p>
             <p>Verrà richiesta la tua posizione, ma questa informazione non uscirà dal tuo dispositivo e non verrà memorizzata.</p>
             <hr>
-            <p class="lead">Quanto ne sai di biodiversità umbra? Scoprilo con il quiz!</p>            
+            <p class="lead">Quanto ne sai di biodiversità umbra? Scoprilo con il quiz!</p>
             <p><a id="bottone-quiz" class="btn btn-lg btn-info btn-pdbu" href="#" role="button">Vai al quiz &raquo;</a></p>
+            <hr>
+            <p class="lead">Vuoi stupire i tuoi amici? Memorizza le meraviglie della biodiversità umbra!</p>
+            <p><a id="bottone-flashcard" class="btn btn-lg btn-info btn-pdbu" href="#" role="button">Vai alle flashcard &raquo;</a></p>
             <hr>
             <p><a id="informazioni" href="#">Informazioni sui dati della biodiversità</a></p>
         </div>
@@ -104,6 +107,15 @@
                 <p><img id="quiz-risultato-immagine" style="width: 100%"></p>
                 <p><a id="bottone-fine-quiz" class="btn btn-lg btn-secondary btn-pdbu &raquo;" href="#" role="button">Torna all'inizio</a></p>
             </div>
+        </div>
+        <div id="flashcard" class="bg-light p-5 rounded" style="display: none">
+            <p id="flashcard-intro">
+                Allena la tua memoria ed impara a conoscere la biodiversità umbra!<br><br>
+                Ti verranno mostrate delle immagini: prova ad indovinare di quale animale o vegetale (o lievito!) si tratta, poi tocca l'immagine e scopri se hai indovinato.<br><br>
+                Iniziamo tra <span id="flashcard-countdown"></span>...
+            </p>
+            <img id="flashcard-immagine" style="width: 100%; height: 100%">
+            <h1 id="flashcard-soluzione" style="width: 100%; height: 100%"></h1>
         </div>
         <div id="about" style="display: none" class="bg-light p-5 rounded">
             <img style="width: 100%" src="img/about.png">

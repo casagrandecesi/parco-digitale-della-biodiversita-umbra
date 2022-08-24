@@ -5,3 +5,8 @@
 .btn-pdbu {
     min-width: 200px;
 }
+#flashcard-soluzione {
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}

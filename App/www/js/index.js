@@ -28,9 +28,11 @@ var NUMERO_DOMANDE = 10;
 
 var bottoneScopri = document.getElementById("bottone-scopri");
 var bottoneQuiz = document.getElementById("bottone-quiz");
+var bottoneFlashcard = document.getElementById("bottone-flashcard");
 var cerca = document.getElementById("cerca");
 var risultati = document.getElementById("risultati");
 var quiz = document.getElementById("quiz");
+var flashcard = document.getElementById("flashcard");
 var fogliolina = document.getElementById("fogliolina");
 var bottoneIndietro = document.getElementById("bottone-indietro");
 var informazioni = document.getElementById("informazioni");
@@ -59,6 +61,14 @@ var quizRisultatoPunteggio = document.getElementById("quiz-risultato-punteggio")
 var quizRisultatoMessaggio = document.getElementById("quiz-risultato-messaggio");
 var quizRisultatoImmagine = document.getElementById("quiz-risultato-immagine");
 var bottoneFineQuiz = document.getElementById("bottone-fine-quiz");
+var flashcardIntro = document.getElementById("flashcard-intro");
+var flashcardCountdown = document.getElementById("flashcard-countdown");
+var flashcardImmagine = document.getElementById("flashcard-immagine");
+var flashcardSoluzione = document.getElementById("flashcard-soluzione");
+var cards = [];
+var secondiCard = 10;
+var indiceCard = 0;
+var flashcardInterval = null;
 
 function isPointInside(x, y, polygon) {
     let inside = false;
@@ -115,8 +125,14 @@ function trovaArea(lat, lon) {
             })();
         })();
         if (inside) {
-            found.push(biodiversita[i])
+            found.push(biodiversita[i]);
         }
+    }
+    // Per coordinate fuori dall'Umbria, invece di restituire
+    // nulla restituiamo tutto! In questo modo, forse, sarà possibile
+    // far valutare il programma da Apple senza inviare dei video
+    if (found.length === 0) {
+        found = biodiversita;
     }
     // Ordina per area (preferito) e nome
     // In questo modo le risorse dell'area F (tutta la regione)
@@ -163,6 +179,7 @@ function nascondiTutto() {
     cerca.style.display = "none";
     risultati.style.display = "none";
     quiz.style.display = "none";
+    flashcard.style.display = "none";
     fogliolina.style.display = "none";
     bottoneIndietro.style.display = "none";
     fogliolina.style.display = "none";
@@ -190,7 +207,9 @@ function cercaBiodiversita(lat, lon) {
 
 function riproduci(mp3) {
     var audio = new Audio(mp3);
-    audio.play();
+    audio.addEventListener("canplaythrough", function () {
+        audio.play();
+    });
 }
 
 function mescola(arr) {
@@ -233,6 +252,46 @@ function iniziaQuiz(livello) {
         domande[i].risposte = risposte;
     })();
     mostraDomanda();
+}
+
+function iniziaFlashcard() {
+    flashcardIntro.style.display = "block";
+    flashcardImmagine.style.display = "none";
+    flashcardSoluzione.style.display = "none";
+    indiceCard = 0;
+    secondiCard = 10;
+    cards = biodiversita.filter(function () { return true; });
+    mescola(cards);
+    function tick() {
+        if (secondiCard == 0) {
+            clearInterval(flashcardInterval);
+            flashcardInterval = null;
+            prossimaFlashcard();
+        }
+        flashcardCountdown.innerHTML = secondiCard + (secondiCard === 1 ? " secondo" : " secondi");
+        --secondiCard;
+    }
+    tick();
+    flashcardInterval = setInterval(tick, 1000);
+}
+
+function prossimaFlashcard() {
+    flashcardImmagine.src = "schede/" + cards[indiceCard].id + "/immagine.jpg";
+    flashcardIntro.style.display = "none";
+    flashcardImmagine.style.display = "block";
+    flashcardSoluzione.style.display = "none";
+}
+
+function soluzioneFlashcard() {
+    flashcardSoluzione.innerHTML = cards[indiceCard].nome + "<br><br><small>Tocca il testo per continuare...</small>";
+    flashcardIntro.style.display = "none";
+    flashcardImmagine.style.display = "none";
+    flashcardSoluzione.style.display = "block";
+    ++indiceCard;
+    if (indiceCard >= flashcard.length) {
+        mescola(cards);
+        indiceCard = 0;
+    }
 }
 
 function resetBottoneDomanda(bottone) {
@@ -360,7 +419,15 @@ function onDeviceReady() {
         quiz.style.display = "block";
     });
 
+    bottoneFlashcard.addEventListener("click", function () {
+        nascondiTutto();
+        bottoneIndietro.style.display = "block";
+        flashcard.style.display = "block";
+        iniziaFlashcard();
+    });
+
     bottoneIndietro.addEventListener("click", function () {
+        if (flashcardInterval) clearInterval(flashcardInterval);
         tornaAllaHome();
     });
 
@@ -396,5 +463,13 @@ function onDeviceReady() {
 
     bottoneFineQuiz.addEventListener("click", function () {
         tornaAllaHome();
+    });
+
+    flashcardImmagine.addEventListener("click", function () {
+        soluzioneFlashcard();
+    });
+
+    flashcardSoluzione.addEventListener("click", function () {
+        prossimaFlashcard();
     });
 }

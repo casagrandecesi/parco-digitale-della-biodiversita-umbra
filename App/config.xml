@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="it.edu.casagrandecesi.biodiversita" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="it.edu.casagrandecesi.ontheroad" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
 	<name>
 		On the road
 	</name>
 	<description>
 		Esplora la ricchezza della biodiversità dell'Umbria on the road!
 	</description>
-	<author email="info@biodiversitaumbra.it" href="https://www.biodiversitaumbra.it">
+	<author email="biodiversita@casagrandecesi.edu.it" href="https://www.casagrandecesi.edu.it">
 		I.I.S. "Casagrande-Cesi", Terni
 	</author>
 	<content src="index.html" />

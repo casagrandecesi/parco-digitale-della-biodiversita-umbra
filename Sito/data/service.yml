@@ -10,8 +10,10 @@ htmlLeft: >
             <img src="images/app-filled.png">
           </p>
 htmlRight: >
-          <img src="images/apk-green.png" width="0" height="0">
           <p style="text-align: center">
-            <a class="apk-download" href="android/ontheroad.apk">&nbsp;</a>
+            <a class="app-store" href="https://apps.apple.com/us/app/biodiversit%C3%A0-umbra-on-the-road/id1641797367"></a>
+          </p>
+          <p style="text-align: center">
+            <a class="apk-download" href="android/ontheroad.apk"></a>
           </p>
 ---

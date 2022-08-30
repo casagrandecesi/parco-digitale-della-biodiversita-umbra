@@ -21,9 +21,7 @@ server: check_hugo
 
 upload: check_hugo
 	@curl --silent --output tools/hugo-uploader 'https://raw.githubusercontent.com/bernarpa/hugo-uploader/master/hugo-uploader' || true
-	python tools/optimize-featured-images.py
 	hugo --minify
-	python tools/remove-unused-wp-content.py
 	python tools/hugo-uploader
 
 public: check_hugo

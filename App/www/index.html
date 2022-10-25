@@ -33,7 +33,7 @@
         content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/index.css">
@@ -108,7 +108,7 @@
                 <p><a id="bottone-fine-quiz" class="btn btn-lg btn-secondary btn-pdbu &raquo;" href="#" role="button">Torna all'inizio</a></p>
             </div>
         </div>
-        <div id="flashcard" class="bg-light p-5 rounded" style="display: none">
+        <div id="flashcard" class="bg-light p-5 rounded" style="display: none; height: 100%">
             <p id="flashcard-intro">
                 Allena la tua memoria ed impara a conoscere la biodiversità umbra!<br><br>
                 Ti verranno mostrate delle immagini: prova ad indovinare di quale animale o vegetale (o lievito!) si tratta, poi tocca l'immagine e scopri se hai indovinato.<br><br>
@@ -137,6 +137,12 @@
             <img src="img/loading.gif">
         </div>
     </main>
+    <script>
+        // stop ios bounce and zoom 
+        document.ontouchmove = event => {
+        event.preventDefault();
+        }; 
+    </script>
     <script src="cordova.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/proj4.js"></script>

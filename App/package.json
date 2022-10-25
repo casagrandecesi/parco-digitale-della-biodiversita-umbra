@@ -1,7 +1,7 @@
 {
   "name": "it.edu.casagrandecesi.ontheroad",
   "displayName": "On the road",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Esplora la ricchezza della biodiversità dell'Umbria on the road!",
   "main": "index.js",
   "scripts": {

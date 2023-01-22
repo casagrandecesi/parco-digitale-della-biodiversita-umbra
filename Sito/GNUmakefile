@@ -17,15 +17,10 @@ help:
 	@echo
 
 server: check_hugo
-	hugo server
-
-upload: check_hugo
-	@curl --silent --output tools/hugo-uploader 'https://raw.githubusercontent.com/bernarpa/hugo-uploader/master/hugo-uploader' || true
-	hugo --minify
-	python tools/hugo-uploader
+	$(hugo_dir)/hugo server
 
 public: check_hugo
-	hugo --minify
+	$(hugo_dir)/hugo --minify
 
 clean:
 	rm -fr public/ resources/

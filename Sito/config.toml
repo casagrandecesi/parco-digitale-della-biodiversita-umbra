@@ -1,5 +1,5 @@
 #baseURL = 'https://www.bernardi.cloud/school/biodiversita/'
-baseURL = 'http://www.casagrande-cesi.it/biodiversita/'
+baseURL = 'https://www.casagrande-cesi.it/biodiversita/'
 languageCode = 'it-it'
 paginate = 6
 theme= "pdbu"

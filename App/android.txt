@@ -1,0 +1,9 @@
+Per aggiungere la piattaforma Android con supporto all'API level 31 si può usare questo comando:
+
+cordova platform add android@11.0.0
+
+Per creare il pacchetto di release si può usare questo comando:
+
+cordova build android --release --buildConfig=build.json
+
+Il file build.json, tuttavia, contiene le password del keystore usato per firmare l'app quindi non è pubblicato.
